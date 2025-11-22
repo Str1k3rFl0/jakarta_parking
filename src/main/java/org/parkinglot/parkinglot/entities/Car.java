@@ -16,13 +16,9 @@ public class Car {
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    public User getOwner() {
-        return owner;
-    }
+    public User getOwner() { return owner; }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
+    public void setOwner(User owner) { this.owner = owner; }
 
     public Long getId() {
         return id;
@@ -31,4 +27,9 @@ public class Car {
         this.id = id;
     }
 
+    public String getLicensePlate() { return licensePlate; }
+    public void setLicensePlate(String licensePlate) { this.licensePlate = licensePlate; }
+
+    public String getParkingSpot() { return parkingSpot; }
+    public void setParkingSpot(String parkingSpot) { this.parkingSpot = parkingSpot; }
 }

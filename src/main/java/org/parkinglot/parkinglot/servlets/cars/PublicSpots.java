@@ -1,6 +1,5 @@
 package org.parkinglot.parkinglot.servlets.cars;
 
-import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,12 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@DeclareRoles({"READ_CARS", "WRITE_CARS"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_CARS"}),
-                httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed = {"WRITE_CARS"})})
-@WebServlet(name = "Cars", value = "/Cars")
-public class Cars extends HttpServlet {
+@WebServlet(name = "PublicSpots", value = "/PublicSpots")
+public class PublicSpots extends HttpServlet {
 
     @Inject
     CarsBean carsBean;
@@ -26,10 +21,9 @@ public class Cars extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<CarDto> cars = carsBean.findAllCars();
 
-
         request.setAttribute("cars", cars);
-        request.setAttribute("numberOfFreeParkingSpots", carsBean.getNumberOfFreeParkingSpots()); // free spots
-        request.getRequestDispatcher("/WEB-INF/pages/cars/cars.jsp").forward(request, response);
+        request.setAttribute("numberOfFreeParkingSpots", carsBean.getNumberOfFreeParkingSpots());
+        request.getRequestDispatcher("/WEB-INF/pages/cars/publicCars.jsp").forward(request, response);
     }
 
     @Override
@@ -44,6 +38,6 @@ public class Cars extends HttpServlet {
             carsBean.deleteCarsByIds(carIds);
         }
 
-        response.sendRedirect(request.getContextPath() + "/Cars");
+        response.sendRedirect(request.getContextPath() + "/PublicSpots");
     }
 }

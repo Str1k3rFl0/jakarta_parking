@@ -140,12 +140,13 @@ public class CarsBean {
         return new CarPhotoDto(photo.getId(), photo.getFilename(), photo.getFileType(), photo.getFileContent());
     }
 
+    // See free parking spots
     public Integer getNumberOfFreeParkingSpots() {
         LOG.info("getNumberOfFreeParkingSpots");
         TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(c) FROM Car c", Long.class);
         Long occupiedSpots = query.getSingleResult();
 
-        int totalCapacity = 10;
+        int totalCapacity = 15;
         return totalCapacity - occupiedSpots.intValue();
     }
 }

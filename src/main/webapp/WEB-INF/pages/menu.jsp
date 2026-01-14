@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <header data-bs-theme="dark">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
@@ -12,6 +13,13 @@
                         ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/")) eq '/about.jsp' ? ' active' : ''}"
                                             aria-current="page" href="${pageContext.request.contextPath}/about.jsp">About</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link
+                            ${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf("/")) eq '/publicCars.jsp' ? ' active' : ''}"
+                                aria-current="page" href="${pageContext.request.contextPath}/PublicSpots">Public Spots</a>
+                    </li>
+
                     <li class="nav-item">
                         <c:if test="${pageContext.request.isUserInRole('READ_CARS')}">
                             <a class="nav-link
